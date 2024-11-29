@@ -418,6 +418,20 @@ const Edit = () => {
                       type="text"
                     ></input>
                   </div>
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Github</label>
+                    <input
+                      value={project.github}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          github: e.target.value,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="text"
+                    ></input>
+                  </div>
                   <hr className="my-10"></hr>
                 </div>
               ))}
