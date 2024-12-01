@@ -57,13 +57,14 @@ const Resume = () => {
                 <h1 className="text-2xl font-bold">Experience</h1>
 
                 {resume.experiences.map(
-                  ({ id, dates, type, position, bullets }) => (
+                  ({ id, dates, type, position, bullets, link }) => (
                     <ProjectResume
                       key={id}
                       dates={dates}
                       type={type}
                       position={position}
                       bullets={bullets}
+                      link={link}
                     ></ProjectResume>
                   )
                 )}
@@ -81,6 +82,22 @@ const Resume = () => {
                 </div>
               </div>
               <div className="mt-5">
+                <h1 className="text-2xl font-bold">Activities</h1>
+
+                {resume.activities.map(
+                  ({ id, dates, type, position, bullets, link }) => (
+                    <ProjectResume
+                      key={id}
+                      dates={dates}
+                      type={type}
+                      position={position}
+                      bullets={bullets}
+                      link={link}
+                    ></ProjectResume>
+                  )
+                )}
+              </div>
+              <div className="mt-5">
                 <h1 className="text-2xl font-bold">Skills</h1>
                 <div className="flex mob:flex-col desktop:flex-row justify-between">
                   {resume.languages && (
@@ -96,26 +113,39 @@ const Resume = () => {
                     </div>
                   )}
 
-                  {resume.frameworks && (
+                  {resume.programming && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Frameworks</h2>
+                      <h2 className="text-lg">Programming Languages</h2>
                       <ul className="list-disc">
-                        {resume.frameworks.map((framework, index) => (
+                        {resume.programming.map((programming, index) => (
                           <li key={index} className="ml-5 py-2">
-                            {framework}
+                            {programming}
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
 
-                  {resume.others && (
+                  {resume.coursework && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Others</h2>
+                      <h2 className="text-lg">Relevant coursework</h2>
                       <ul className="list-disc">
-                        {resume.others.map((other, index) => (
+                        {resume.coursework.map((coursework, index) => (
                           <li key={index} className="ml-5 py-2">
-                            {other}
+                            {coursework}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {resume.technologies && (
+                    <div className="mt-2 mob:mt-5">
+                      <h2 className="text-lg">Technologies</h2>
+                      <ul className="list-disc">
+                        {resume.technologies.map((technologies, index) => (
+                          <li key={index} className="ml-5 py-2">
+                            {technologies}
                           </li>
                         ))}
                       </ul>

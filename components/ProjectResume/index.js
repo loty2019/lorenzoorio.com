@@ -1,6 +1,7 @@
 import React from "react";
+import Button from "../Button";
 
-const ProjectResume = ({ dates, type, position, bullets }) => {
+const ProjectResume = ({ dates, type, position, bullets, link }) => {
   const [bulletsLocal, setBulletsLocal] = React.useState(bullets.split(","));
 
   return (
@@ -8,6 +9,11 @@ const ProjectResume = ({ dates, type, position, bullets }) => {
       <div className="text-lg w-2/5">
         <h2>{dates}</h2>
         <h3 className="text-sm opacity-50">{type}</h3>
+        {link && (
+          <a href={link} className="text-sm underline" target="_blank" rel="noopener noreferrer">
+            See More
+          </a>
+        )}
       </div>
       <div className="w-3/5">
         <h2 className="text-lg font-bold">{position}</h2>

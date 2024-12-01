@@ -146,6 +146,46 @@ const Edit = () => {
     });
   };
 
+  // Activity Handlers
+  const handleAddActivity = () => {
+    setData({
+      ...data,
+      resume: {
+        ...data.resume,
+        activities: [
+          ...data.resume.activities,
+          {
+            id: uuidv4(),
+            dates: "Enter Dates",
+            type: "Activity Type",
+            position: "Activity Position",
+            bullets: [], // Initialize as an empty array
+            link: "Activity link",
+          },
+        ],
+      },
+    });
+  };
+
+  const handleEditActivity = (index, editActivity) => {
+    let copyActivities = data.resume.activities;
+    copyActivities[index] = { ...editActivity };
+    setData({
+      ...data,
+      resume: { ...data.resume, activities: copyActivities },
+    });
+  };
+
+  const handleDeleteActivity = (id) => {
+    const updatedActivities = data.resume.activities.filter(
+      (activity) => activity.id !== id
+    );
+    setData({
+      ...data,
+      resume: { ...data.resume, activities: updatedActivities },
+    });
+  };
+
   return (
     <div className={`container mx-auto ${data.showCursor && "cursor-none"}`}>
       <Header isBlog></Header>
@@ -667,6 +707,23 @@ const Edit = () => {
                       ></input>
                     </div>
                   </div>
+                  <div className="mt-2 flex">
+                    <label className="w-1/5 text-lg opacity-50">Link</label>
+                    <div className="w-4/5 ml-10 flex flex-col">
+                      <input
+                        value={experiences.link}
+                        onChange={(e) =>
+                          handleEditExperiences(index, {
+                            ...experiences,
+                            link: e.target.value,
+                          })
+                        }
+                        placeholder="link to show work"
+                        className="p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      ></input>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -739,6 +796,114 @@ const Edit = () => {
                 ></input>
               </div>
             </div>
+
+            <hr className="my-10"></hr>
+            <div className="mt-10">
+              <h1>Activities</h1>
+              <div className="mt-10">
+                {data.resume.activities.map((activity, index) => (
+                  <div className="mt-5" key={activity.id}>
+                    <div className="flex items-center justify-between">
+                      <h1 className="text-2xl">{activity.position}</h1>
+                      <Button
+                        onClick={() => handleDeleteActivity(activity.id)}
+                        type="primary"
+                      >
+                        Delete
+                      </Button>
+                    </div>
+
+                    <div className="flex items-center mt-5">
+                      <label className="w-1/5 text-lg opacity-50">Dates</label>
+                      <input
+                        value={activity.dates}
+                        onChange={(e) =>
+                          handleEditActivity(index, {
+                            ...activity,
+                            dates: e.target.value,
+                          })
+                        }
+                        className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      />
+                    </div>
+
+                    <div className="flex items-center mt-2">
+                      <label className="w-1/5 text-lg opacity-50">Type</label>
+                      <input
+                        value={activity.type}
+                        onChange={(e) =>
+                          handleEditActivity(index, {
+                            ...activity,
+                            type: e.target.value,
+                          })
+                        }
+                        className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      />
+                    </div>
+
+                    <div className="flex items-center mt-2">
+                      <label className="w-1/5 text-lg opacity-50">
+                        Name of Activity
+                      </label>
+                      <input
+                        value={activity.position}
+                        onChange={(e) =>
+                          handleEditActivity(index, {
+                            ...activity,
+                            position: e.target.value,
+                          })
+                        }
+                        className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      />
+                    </div>
+
+                    <div className="mt-2 flex">
+                      <label className="w-1/5 text-lg opacity-50">
+                        Bullets
+                      </label>
+                      <div className="w-4/5 ml-10 flex flex-col">
+                        <input
+                          value={activity.bullets}
+                          onChange={(e) =>
+                            handleEditActivity(index, {
+                              ...activity,
+                              bullets: e.target.value,
+                            })
+                          }
+                          placeholder="Bullet One, Bullet Two, Bullet Three"
+                          className="p-2 rounded-md shadow-lg border-2"
+                          type="text"
+                        ></input>
+                      </div>
+                    </div>
+
+                    <div className="mt-2 flex">
+                      <label className="w-1/5 text-lg opacity-50">Link</label>
+                      <input
+                        value={activity.link}
+                        onChange={(e) =>
+                          handleEditActivity(index, {
+                            ...activity,
+                            link: e.target.value,
+                          })
+                        }
+                        className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="my-10">
+                <Button onClick={handleAddActivity} type="primary">
+                  Add Activity +
+                </Button>
+              </div>
+            </div>
+
             <hr className="my-10"></hr>
             <div className="mt-10">
               <div className="flex">
@@ -800,21 +965,23 @@ const Edit = () => {
               </div>
               <hr className="my-10"></hr>
               <div className="flex">
-                <label className="w-1/5 text-lg opacity-50">Frameworks</label>
+                <label className="w-1/5 text-lg opacity-50">
+                  Programming Languages
+                </label>
                 <div className="w-4/5 ml-10 flex flex-col">
-                  {data.resume.frameworks.map((framework, index) => (
+                  {data.resume.programming.map((programming, index) => (
                     <div key={index} className="flex">
                       <input
-                        value={framework}
+                        value={programming}
                         onChange={(e) => {
                           setData({
                             ...data,
                             resume: {
                               ...data.resume,
-                              frameworks: [
-                                ...data.resume.frameworks.slice(0, index),
+                              programming: [
+                                ...data.resume.programming.slice(0, index),
                                 e.target.value,
-                                ...data.resume.frameworks.slice(index + 1),
+                                ...data.resume.programming.slice(index + 1),
                               ],
                             },
                           });
@@ -828,7 +995,7 @@ const Edit = () => {
                             ...data,
                             resume: {
                               ...data.resume,
-                              frameworks: data.resume.frameworks.filter(
+                              programming: data.resume.programming.filter(
                                 (value, i) => index !== i
                               ),
                             },
@@ -845,7 +1012,7 @@ const Edit = () => {
                         ...data,
                         resume: {
                           ...data.resume,
-                          frameworks: [...data.resume.frameworks, "Added"],
+                          programming: [...data.resume.programming, "Added"],
                         },
                       })
                     }
@@ -858,21 +1025,23 @@ const Edit = () => {
               </div>
               <hr className="my-10"></hr>
               <div className="flex">
-                <label className="w-1/5 text-lg opacity-50">Others</label>
+                <label className="w-1/5 text-lg opacity-50">
+                  Relevant coursework
+                </label>
                 <div className="w-4/5 ml-10 flex flex-col">
-                  {data.resume.others.map((other, index) => (
+                  {data.resume.coursework.map((coursework, index) => (
                     <div key={index} className="flex">
                       <input
-                        value={other}
+                        value={coursework}
                         onChange={(e) => {
                           setData({
                             ...data,
                             resume: {
                               ...data.resume,
-                              others: [
-                                ...data.resume.others.slice(0, index),
+                              coursework: [
+                                ...data.resume.coursework.slice(0, index),
                                 e.target.value,
-                                ...data.resume.others.slice(index + 1),
+                                ...data.resume.coursework.slice(index + 1),
                               ],
                             },
                           });
@@ -886,7 +1055,7 @@ const Edit = () => {
                             ...data,
                             resume: {
                               ...data.resume,
-                              others: data.resume.others.filter(
+                              coursework: data.resume.coursework.filter(
                                 (value, i) => index !== i
                               ),
                             },
@@ -903,7 +1072,65 @@ const Edit = () => {
                         ...data,
                         resume: {
                           ...data.resume,
-                          others: [...data.resume.others, "Added"],
+                          coursework: [...data.resume.coursework, "Added"],
+                        },
+                      })
+                    }
+                    type="primary"
+                    classes="hover:scale-100"
+                  >
+                    Add +
+                  </Button>
+                </div>
+              </div>
+              <hr className="my-10"></hr>
+              <div className="flex">
+                <label className="w-1/5 text-lg opacity-50">Technologies</label>
+                <div className="w-4/5 ml-10 flex flex-col">
+                  {data.resume.technologies.map((technologies, index) => (
+                    <div key={index} className="flex">
+                      <input
+                        value={technologies}
+                        onChange={(e) => {
+                          setData({
+                            ...data,
+                            resume: {
+                              ...data.resume,
+                              technologies: [
+                                ...data.resume.technologies.slice(0, index),
+                                e.target.value,
+                                ...data.resume.technologies.slice(index + 1),
+                              ],
+                            },
+                          });
+                        }}
+                        className="w-full p-2 rounded-md shadow-lg border-2"
+                        type="text"
+                      ></input>
+                      <Button
+                        onClick={() =>
+                          setData({
+                            ...data,
+                            resume: {
+                              ...data.resume,
+                              technologies: data.resume.technologies.filter(
+                                (value, i) => index !== i
+                              ),
+                            },
+                          })
+                        }
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  ))}
+                  <Button
+                    onClick={() =>
+                      setData({
+                        ...data,
+                        resume: {
+                          ...data.resume,
+                          technologies: [...data.resume.technologies, "Added"],
                         },
                       })
                     }

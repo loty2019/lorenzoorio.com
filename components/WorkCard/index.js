@@ -18,16 +18,16 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
         }}
       >
         <div
-          className="relative rounded-lg overflow-hidden transition-all ease-out duration-300 h-44 mob:h-auto w-full"
-          style={{ height: "600px" }}
+          className="flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 h-44 mob:h-auto w-full"
+          style={{ height: "500px" }}
         >
           <img
             alt={name}
-            className="h-full w-full object-cover hover:scale-110 transition-all ease-out duration-300"
+            className="h-full w-auto object-cover transition-all ease-out duration-300"
             src={img}
           ></img>
         </div>
-        <div className="text-left mt-5">
+        <div className="text-left mt-0 ml-2">
           <h1 className="text-3xl font-medium">
             {name ? name : "Project Name"}
           </h1>
@@ -36,8 +36,8 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
           </h2>
         </div>
         <div className="mt-2">
-          <Button type="primary" onClick={() => window.open(github)}>
-            GitHub Repo
+          <Button type="secondary" onClick={() => window.open(github)}>
+            GitHub Repo.
           </Button>
         </div>
       </div>
