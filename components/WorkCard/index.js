@@ -35,7 +35,7 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
             {description ? description : "Description"}
           </h2>
         </div>
-        <div className="mt-2">
+        <div className="mt-2 pl-2 bg-slate-100 rounded-lg">
           <Button type="secondary" onClick={() => window.open(github)}>
             GitHub Repo.
           </Button>
