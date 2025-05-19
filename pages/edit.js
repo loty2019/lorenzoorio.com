@@ -591,6 +591,21 @@ const Edit = () => {
                       type="text"
                     />
                   </div>
+                  <div className="flex items-center mt-5">
+                    <label className="w-1/5 text-lg opacity-50">Logo</label>
+                    <input
+                      value={social.logo || ""}
+                      onChange={(e) =>
+                        editSocials(index, {
+                          ...social,
+                          logo: e.target.value,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="text"
+                      placeholder="Logo URL"
+                    />
+                  </div>
                   <hr className="my-10"></hr>
                 </div>
               </>

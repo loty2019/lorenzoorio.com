@@ -2,6 +2,10 @@ import React from "react";
 import Button from "../Button";
 
 const WorkCard = ({ img, name, description, github, onClick }) => {
+  if (!img && !name && !description && !github) {
+    return null;
+  }
+
   return (
     <>
       <div
@@ -17,16 +21,18 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
           e.currentTarget.style.boxShadow = "none";
         }}
       >
-        <div
-          className="flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 h-44 mob:h-auto w-full"
-          style={{ height: "500px" }}
-        >
-          <img
-            alt={name}
-            className="h-full w-auto object-cover transition-all ease-out duration-300"
-            src={img}
-          ></img>
-        </div>
+        {img && (
+          <div
+            className="flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 h-44 mob:h-auto w-full p-10"
+            style={{ height: "500px" }}
+          >
+            <img
+              alt={name}
+              className="h-full w-auto object-cover transition-all ease-out duration-300"
+              src={img}
+            />
+          </div>
+        )}
         <div className="text-left mt-0 ml-2">
           <h1 className="text-3xl font-medium">
             {name ? name : "Project Name"}
@@ -35,11 +41,13 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
             {description ? description : "Description"}
           </h2>
         </div>
-        <div className="mt-2 pl-2 bg-slate-100 rounded-lg">
-          <Button type="secondary" onClick={() => window.open(github)}>
-            GitHub Repo.
-          </Button>
-        </div>
+        {github && (
+          <div className="mt-2 pl-2 bg-slate-100 rounded-lg">
+            <Button type="secondary" onClick={() => window.open(github)}>
+              GitHub Repo.
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );
