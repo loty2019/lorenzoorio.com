@@ -1,7 +1,9 @@
 import React from "react";
 import Button from "../Button";
+import { useTheme } from "next-themes";
 
 const WorkCard = ({ img, name, description, github, onClick }) => {
+  const { theme } = useTheme();
   if (!img && !name && !description && !github) {
     return null;
   }
@@ -15,7 +17,10 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
           backdropFilter: "blur(10px)", // Glass effect
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.1)";
+          e.currentTarget.style.boxShadow =
+            theme === "dark"
+              ? "0 4px 20px rgba(255, 255, 255, 0.1)" // lighter shadow for dark bg
+              : "0 4px 20px rgba(0, 0, 0, 0.1)"; // darker shadow for light bg
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.boxShadow = "none";
@@ -42,7 +47,11 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
           </h2>
         </div>
         {github && (
-          <div className="mt-2 pl-2 bg-slate-100 rounded-lg">
+          <div
+            className={`mt-2 pl-2 rounded-lg transition-all duration-300 ${
+              theme === "dark" ? "bg-slate-600" : "bg-slate-100"
+            }`}
+          >
             <Button type="secondary" onClick={() => window.open(github)}>
               GitHub Repo.
             </Button>
