@@ -160,7 +160,7 @@ const Resume = () => {
         )}
       </div>
       <Footer />
-      <div className="gradient-circle-bottom mt-10"></div>
+      
     </>
   );
 };

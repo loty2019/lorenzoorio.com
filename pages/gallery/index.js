@@ -55,15 +55,15 @@ const GalleryPage = () => {
             >
               Gallery.
             </h1>
-            <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-10">
+            <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-8">
               {photos.map((photo) => (
                 <Link href={`/photo/${photo.id}`} key={photo.id}>
-                  <div className="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <div className="aspect-[4/3] w-full bg-gray-200 dark:bg-gray-800">
+                  <div className="cursor-pointer">
+                    <div className="h-96 w-full flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-300">
                       <img
                         src={`/api/photo/${photo.id}`}
                         alt=""
-                        className="w-full h-full object-cover"
+                        className="max-h-full max-w-full object-contain rounded-xl shadow-md shadow-black/10"
                       />
                     </div>
                     {photo.date && (
@@ -77,6 +77,7 @@ const GalleryPage = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     )
   );
