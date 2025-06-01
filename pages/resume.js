@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import ProjectResume from "../components/ProjectResume";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
 import { useTheme } from "next-themes";
 // Data
 import { name, showResume } from "../data/portfolio.json";
@@ -32,6 +33,7 @@ const Resume = () => {
         </div>
       )}
       {data.showCursor && <Cursor />}
+      <div className="gradient-circle mt-10"></div>
       <div
         className={`container mx-auto mb-10 ${
           data.showCursor && "cursor-none"
@@ -39,7 +41,7 @@ const Resume = () => {
       >
         <Header isBlog />
         {mount && (
-          <div className="mt-10 w-full flex flex-col items-center">
+          <div className="mt-14 w-full flex flex-col items-center">
             <div
               className={`w-full ${
                 mount && theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
@@ -157,6 +159,8 @@ const Resume = () => {
           </div>
         )}
       </div>
+      <Footer />
+      <div className="gradient-circle-bottom mt-10"></div>
     </>
   );
 };

@@ -72,7 +72,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleWorkScroll}>Projects</Button>
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
-                    <Button onClick={() => router.push("/blog")}>Gallery</Button>
+                    <Button onClick={() => router.push("/gallery")}>
+                      Gallery
+                    </Button>
                   )}
                   {showResume && (
                     <Button
@@ -85,7 +87,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   )}
 
                   <Button
-                    onClick={() => window.open("mailto:lorenzo.orio@icloud.com")}
+                    onClick={() =>
+                      window.open("mailto:lorenzo.orio@icloud.com")
+                    }
                   >
                     Contact
                   </Button>
@@ -96,7 +100,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                     Home
                   </Button>
                   {showBlog && (
-                    <Button onClick={() => router.push("/blog")}>Blog</Button>
+                    <Button onClick={() => router.push("/gallery")}>
+                      Gallery
+                    </Button>
                   )}
                   {showResume && (
                     <Button
@@ -108,7 +114,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   )}
 
                   <Button
-                    onClick={() => window.open("mailto:lorenzo.orio@icloud.com")}
+                    onClick={() =>
+                      window.open("mailto:lorenzo.orio@icloud.com")
+                    }
                   >
                     Contact
                   </Button>
@@ -134,7 +142,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
             <Button onClick={handleWorkScroll}>Projects</Button>
             <Button onClick={handleAboutScroll}>About</Button>
             {showBlog && (
-              <Button onClick={() => router.push("/blog")}>Blog</Button>
+              <Button onClick={() => router.push("/gallery")}>Gallery</Button>
             )}
             {showResume && (
               <Button
@@ -165,7 +173,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
           <div className="flex">
             <Button onClick={() => router.push("/")}>Home</Button>
             {showBlog && (
-              <Button onClick={() => router.push("/blog")}>Blog</Button>
+              <Button onClick={() => router.push("/gallery")}>Gallery</Button>
             )}
             {showResume && (
               <Button
