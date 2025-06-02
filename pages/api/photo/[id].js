@@ -24,11 +24,11 @@ export default async function handler(req, res) {
     result.data.on("end", async () => {
       const fullBuffer = Buffer.concat(buffers);
 
-      // Resize and compress with sharp
-      const optimizedBuffer = await sharp(fullBuffer)
-        .resize({ width: 1600 }) // or smaller if needed
-        .jpeg({ quality: 80 }) // adjust quality as desired
-        .toBuffer();
+      // Resize and compress with sharp NOTE: sharp incompatible with vercel
+      // const optimizedBuffer = await sharp(fullBuffer)
+      //   .resize({ width: 1600 }) // or smaller if needed
+      //   .jpeg({ quality: 80 }) // adjust quality as desired
+      //   .toBuffer();
 
       res.setHeader("Content-Type", "image/jpeg");
       res.setHeader("Content-Disposition", "inline");
