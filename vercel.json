@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/photo/[id].js": {
+      "externalDependencies": ["sharp"]
+    }
+  }
+}
