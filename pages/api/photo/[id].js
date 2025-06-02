@@ -1,6 +1,5 @@
 import { google } from "googleapis";
 import path from "path";
-import sharp from "sharp";
 
 const auth = new google.auth.GoogleAuth({
   credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
@@ -33,7 +32,8 @@ export default async function handler(req, res) {
       res.setHeader("Content-Type", "image/jpeg");
       res.setHeader("Content-Disposition", "inline");
       res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-      res.send(optimizedBuffer);
+      res.setHeader("x-photo-meta", JSON.stringify(exif ?? {}));
+      res.send(fullBuffer); // send raw image buffer directly
       return;
     });
 
