@@ -21,20 +21,26 @@ export default async function handler(req, res) {
     result.data.on("data", (chunk) => buffers.push(chunk));
 
     result.data.on("end", async () => {
-      const fullBuffer = Buffer.concat(buffers);
+      try {
+        const fullBuffer = Buffer.concat(buffers);
 
-      // Resize and compress with sharp NOTE: sharp incompatible with vercel
-      // const optimizedBuffer = await sharp(fullBuffer)
-      //   .resize({ width: 1600 }) // or smaller if needed
-      //   .jpeg({ quality: 80 }) // adjust quality as desired
-      //   .toBuffer();
+        let exif = {};
+        try {
+          const exifr = await import("exifr");
+          exif = await exifr.parse(fullBuffer);
+        } catch (err) {
+          console.warn("EXIF parse failed:", err.message);
+        }
 
-      res.setHeader("Content-Type", "image/jpeg");
-      res.setHeader("Content-Disposition", "inline");
-      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-      res.setHeader("x-photo-meta", JSON.stringify(exif ?? {}));
-      res.send(fullBuffer); // send raw image buffer directly
-      return;
+        res.setHeader("Content-Type", "image/jpeg");
+        res.setHeader("Content-Disposition", "inline");
+        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        res.setHeader("x-photo-meta", JSON.stringify(exif));
+        res.send(fullBuffer);
+      } catch (err) {
+        console.error("Response error:", err.message);
+        res.status(500).send("Server error processing image");
+      }
     });
 
     result.data.on("error", (err) => {
