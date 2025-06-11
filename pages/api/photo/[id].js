@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import path from "path";
+import sharp from "sharp";
 
 const auth = new google.auth.GoogleAuth({
   credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
@@ -7,7 +7,8 @@ const auth = new google.auth.GoogleAuth({
 });
 
 export default async function handler(req, res) {
-  const { id } = req.query;
+  const { id, w } = req.query;
+  const width = w ? parseInt(w, 10) : 1600;
   const drive = google.drive({ version: "v3", auth });
 
   try {
@@ -32,11 +33,16 @@ export default async function handler(req, res) {
           console.warn("EXIF parse failed:", err.message);
         }
 
+        const optimizedBuffer = await sharp(fullBuffer)
+          .resize({ width })
+          .jpeg({ quality: 80 })
+          .toBuffer();
+
         res.setHeader("Content-Type", "image/jpeg");
         res.setHeader("Content-Disposition", "inline");
         res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
         res.setHeader("x-photo-meta", JSON.stringify(exif));
-        res.send(fullBuffer);
+        res.send(optimizedBuffer);
       } catch (err) {
         console.error("Response error:", err.message);
         res.status(500).send("Server error processing image");
