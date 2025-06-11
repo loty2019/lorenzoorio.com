@@ -17,19 +17,20 @@ const ActivityCard = ({ name, description, image, date, link }) => {
       onClick={() => link && window.open(link)}
     >
       {image && (
-        <div className="w-full h-48 overflow-hidden rounded-md mb-4">
-          <img src={image} alt={name} className="object-cover w-full h-full" />
+        <div className="w-fit h-96 overflow-hidden rounded-md mb-4">
+          <img src={image} alt={name} className="object-cover" />
         </div>
       )}
       <h1 className="text-3xl">{name ? name : "Heading"}</h1>
       {date && <p className="text-sm opacity-60 mt-1">{date}</p>}
-      <p className="mt-5 opacity-40 text-xl">
-        {description
-          ? description
-          : "Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-      </p>
+
+      {description.split("\n").map((line, idx) => (
+        <p key={idx} className="mt-5 opacity-70 text-xl">
+          {line}
+        </p>
+      ))}
     </div>
   );
 };
 
-export default ActivityCard;
+export default ActivityCard; 
