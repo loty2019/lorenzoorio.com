@@ -1,6 +1,4 @@
 import { google } from "googleapis";
-import path from "path";
-import fs from "fs";
 
 const SCOPES = ["https://www.googleapis.com/auth/drive.readonly"];
 
