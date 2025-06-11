@@ -7,7 +7,7 @@ const PhotoPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
       <img
-        src={`/api/photo/${id}`}
+        src={`/api/photo/${id}?w=1920`}
         alt=""
         className="max-w-full  max-h-screen object-contain rounded-lg shadow-lg"
       />
