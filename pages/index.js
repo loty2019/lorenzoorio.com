@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Header from "../components/Header";
-import ServiceCard from "../components/ServiceCard";
+import ActivityCard from "../components/ActivityCard";
 import Socials from "../components/Socials";
 import WorkCard from "../components/WorkCard";
 import { useIsomorphicLayoutEffect } from "../utils";
@@ -124,13 +124,16 @@ export default function Home() {
         </div>
 
         <div className="mt-10 laptop:mt-32 p-2 laptop:p-0">
-          <h1 className="text-3xl text-bold">Services.</h1>
+          <h1 className="text-3xl text-bold">Activities.</h1>
           <div className="mt-5 tablet:m-10 grid grid-cols-1 laptop:grid-cols-2 gap-6">
-            {data.services.map((service, index) => (
-              <ServiceCard
+            {data.activities.map((activity, index) => (
+              <ActivityCard
                 key={index}
-                name={service.title}
-                description={service.description}
+                name={activity.title}
+                description={activity.description}
+                image={activity.image}
+                date={activity.date}
+                link={activity.link}
               />
             ))}
           </div>

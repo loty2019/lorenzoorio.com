@@ -59,33 +59,36 @@ const Edit = () => {
     setData({ ...data, projects: copyProjects });
   };
 
-  // Services Handler
+  // Activities Handler
 
-  const editServices = (serviceIndex, editService) => {
-    let copyServices = data.services;
-    copyServices[serviceIndex] = { ...editService };
-    setData({ ...data, services: copyServices });
+  const editActivities = (activityIndex, editActivity) => {
+    let copyActivities = data.activities;
+    copyActivities[activityIndex] = { ...editActivity };
+    setData({ ...data, activities: copyActivities });
   };
 
-  const addService = () => {
+  const addActivity = () => {
     setData({
       ...data,
-      services: [
-        ...data.services,
+      activities: [
+        ...data.activities,
         {
           id: uuidv4(),
-          title: "New Service",
+          title: "New Activity",
           description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+          image: "https://via.placeholder.com/400",
+          date: "2024-01-01",
+          link: "https://example.com",
         },
       ],
     });
   };
 
-  const deleteService = (id) => {
-    const copyServices = data.services;
-    copyServices = copyServices.filter((service) => service.id !== id);
-    setData({ ...data, services: copyServices });
+  const deleteActivity = (id) => {
+    let copyActivities = data.activities;
+    copyActivities = copyActivities.filter((activity) => activity.id !== id);
+    setData({ ...data, activities: copyActivities });
   };
 
   // Socials Handler
@@ -215,10 +218,10 @@ const Edit = () => {
               Projects
             </Button>
             <Button
-              onClick={() => setCurrentTabs("SERVICES")}
-              type={currentTabs === "SERVICES" && "primary"}
+              onClick={() => setCurrentTabs("ACTIVITIES")}
+              type={currentTabs === "ACTIVITIES" && "primary"}
             >
-              Services
+              Activities
             </Button>
             <Button
               onClick={() => setCurrentTabs("ABOUT")}
@@ -484,16 +487,16 @@ const Edit = () => {
             </div>
           </>
         )}
-        {/* SERVICES */}
-        {currentTabs === "SERVICES" && (
+        {/* ACTIVITIES */}
+        {currentTabs === "ACTIVITIES" && (
           <>
             <div className="mt-10">
-              {data.services.map((service, index) => (
-                <div key={service.id}>
+              {data.activities.map((activity, index) => (
+                <div key={activity.id}>
                   <div className="flex items-center justify-between">
-                    <h1 className="text-2xl">{service.title}</h1>
+                    <h1 className="text-2xl">{activity.title}</h1>
                     <Button
-                      onClick={() => deleteService(service.id)}
+                      onClick={() => deleteActivity(activity.id)}
                       type="primary"
                     >
                       Delete
@@ -502,10 +505,10 @@ const Edit = () => {
                   <div className="flex items-center mt-5">
                     <label className="w-1/5 text-lg opacity-50">Title</label>
                     <input
-                      value={service.title}
+                      value={activity.title}
                       onChange={(e) =>
-                        editServices(index, {
-                          ...service,
+                        editActivities(index, {
+                          ...activity,
                           title: e.target.value,
                         })
                       }
@@ -518,23 +521,65 @@ const Edit = () => {
                       Description
                     </label>
                     <textarea
-                      value={service.description}
+                      value={activity.description}
                       onChange={(e) =>
-                        editServices(index, {
-                          ...service,
+                        editActivities(index, {
+                          ...activity,
                           description: e.target.value,
                         })
                       }
                       className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
                     ></textarea>
                   </div>
+                  <div className="flex items-center mt-5">
+                    <label className="w-1/5 text-lg opacity-50">Image</label>
+                    <input
+                      value={activity.image}
+                      onChange={(e) =>
+                        editActivities(index, {
+                          ...activity,
+                          image: e.target.value,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="text"
+                    ></input>
+                  </div>
+                  <div className="flex items-center mt-5">
+                    <label className="w-1/5 text-lg opacity-50">Date</label>
+                    <input
+                      value={activity.date}
+                      onChange={(e) =>
+                        editActivities(index, {
+                          ...activity,
+                          date: e.target.value,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="text"
+                    ></input>
+                  </div>
+                  <div className="flex items-center mt-5">
+                    <label className="w-1/5 text-lg opacity-50">Link</label>
+                    <input
+                      value={activity.link}
+                      onChange={(e) =>
+                        editActivities(index, {
+                          ...activity,
+                          link: e.target.value,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="text"
+                    ></input>
+                  </div>
                   <hr className="my-10"></hr>
                 </div>
               ))}
             </div>
             <div className="my-10">
-              <Button onClick={addService} type="primary">
-                Add Service +
+              <Button onClick={addActivity} type="primary">
+                Add Activity +
               </Button>
             </div>
           </>
