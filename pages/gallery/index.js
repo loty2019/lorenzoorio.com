@@ -69,7 +69,7 @@ const GalleryPage = () => {
                       <div className="cursor-pointer">
                         <div className="relative h-96 w-full overflow-hidden hover:scale-105 transition-transform duration-300">
                           <Image
-                            src={photo.url}
+                            src={`/api/photo/${photo.id}`}
                             alt={photo.name}
                             layout="fill"
                             objectFit="contain"

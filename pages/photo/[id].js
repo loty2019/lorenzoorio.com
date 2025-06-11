@@ -4,9 +4,7 @@ import { useRouter } from "next/router";
 const PhotoPage = () => {
   const { id } = useRouter().query;
 
-  const src = id
-    ? `https://drive.google.com/thumbnail?id=${id}&sz=w1920`
-    : "";
+  const src = id ? `/api/photo/${id}` : "";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
