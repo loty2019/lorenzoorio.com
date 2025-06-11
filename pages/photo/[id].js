@@ -1,16 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 const PhotoPage = () => {
   const { id } = useRouter().query;
 
+  const src = id ? `/api/photo/${id}` : "";
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
-      <img
-        src={`/api/photo/${id}`}
-        alt=""
-        className="max-w-full  max-h-screen object-contain rounded-lg shadow-lg"
-      />
+      {id && (
+        <div className="relative w-full h-screen">
+          <Image
+            src={src}
+            alt=""
+            layout="fill"
+            objectFit="contain"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
     </div>
   );
 };
