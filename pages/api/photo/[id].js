@@ -6,6 +6,7 @@ const auth = new google.auth.GoogleAuth({
 });
 
 export default async function handler(req, res) {
+
   const { id } = req.query;
   const drive = google.drive({ version: "v3", auth });
 

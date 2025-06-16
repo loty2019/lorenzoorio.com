@@ -7,7 +7,7 @@ const PhotoPage = () => {
   const src = id ? `/api/photo/${id}` : "";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white p-4">
+    <div className="min-h-screen flex items-center justify-center dark:bg-gray-950">
       {id && (
         <div className="relative w-full h-screen">
           <Image

@@ -73,14 +73,9 @@ const GalleryPage = () => {
                             alt={photo.name}
                             layout="fill"
                             objectFit="contain"
-                            className="rounded-xl shadow-md shadow-black/10"
+                      
                           />
                         </div>
-                        {photo.date && (
-                          <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
-                            {photo.date}
-                          </div>
-                        )}
                       </div>
                     </Link>
                   ))}
