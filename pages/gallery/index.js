@@ -14,13 +14,23 @@ const GalleryPage = () => {
   const text = useRef();
   const [mounted, setMounted] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [folders, setFolders] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState("all");
   const skeletonCount = 6;
+
+  const displayedPhotos =
+    selectedFolder === "all"
+      ? photos
+      : photos.filter((p) => p.folderId === selectedFolder);
 
   useEffect(() => {
     setMounted(true);
     fetch("/api/photos")
       .then((res) => res.json())
-      .then((data) => setPhotos(data));
+      .then((data) => {
+        setPhotos(data.photos);
+        setFolders(data.folders);
+      });
   }, []);
 
   useEffect(() => {
@@ -56,6 +66,35 @@ const GalleryPage = () => {
             >
               Gallery.
             </h1>
+            {folders.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-4">
+                <button
+                  onClick={() => setSelectedFolder('all')}
+                  className={`flex items-center px-3 py-1 rounded link transition-colors ${
+                    selectedFolder === 'all'
+                      ? 'bg-slate-200 dark:bg-slate-700'
+                      : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  <img src="/images/folder.svg" alt="All Photos" className="h-5 w-5 mr-1" />
+                  <span className="text-sm">All Photos</span>
+                </button>
+                {folders.map((folder) => (
+                  <button
+                    key={folder.id}
+                    onClick={() => setSelectedFolder(folder.id)}
+                    className={`flex items-center px-3 py-1 rounded link transition-colors ${
+                      selectedFolder === folder.id
+                        ? 'bg-slate-200 dark:bg-slate-700'
+                        : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    <img src="/images/folder.svg" alt={folder.name} className="h-5 w-5 mr-1" />
+                    <span className="text-sm">{folder.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
             <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-8">
               {photos.length === 0
                 ? Array.from({ length: skeletonCount }).map((_, i) => (
@@ -64,7 +103,7 @@ const GalleryPage = () => {
                       className="h-96 w-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"
                     />
                   ))
-                : photos.map((photo) => (
+                : displayedPhotos.map((photo) => (
                     <Link href={`/photo/${photo.id}`} key={photo.id}>
                       <div className="cursor-pointer">
                         <div className="relative h-96 w-full overflow-hidden hover:scale-105 transition-transform duration-300">
