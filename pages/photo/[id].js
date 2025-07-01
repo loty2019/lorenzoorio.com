@@ -12,7 +12,7 @@ const PhotoPage = () => {
   useEffect(() => {
     fetch("/api/photos")
       .then((res) => res.json())
-      .then((data) => setPhotos(data));
+      .then((data) => setPhotos(data.photos));
   }, []);
 
   useEffect(() => {

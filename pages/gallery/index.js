@@ -14,13 +14,23 @@ const GalleryPage = () => {
   const text = useRef();
   const [mounted, setMounted] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [folders, setFolders] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState("all");
   const skeletonCount = 6;
+
+  const displayedPhotos =
+    selectedFolder === "all"
+      ? photos
+      : photos.filter((p) => p.folderId === selectedFolder);
 
   useEffect(() => {
     setMounted(true);
     fetch("/api/photos")
       .then((res) => res.json())
-      .then((data) => setPhotos(data));
+      .then((data) => {
+        setPhotos(data.photos);
+        setFolders(data.folders);
+      });
   }, []);
 
   useEffect(() => {
@@ -56,6 +66,20 @@ const GalleryPage = () => {
             >
               Gallery.
             </h1>
+            {folders.length > 0 && (
+              <select
+                className="mt-6 p-2 border rounded"
+                value={selectedFolder}
+                onChange={(e) => setSelectedFolder(e.target.value)}
+              >
+                <option value="all">All Photos</option>
+                {folders.map((folder) => (
+                  <option key={folder.id} value={folder.id}>
+                    {folder.name}
+                  </option>
+                ))}
+              </select>
+            )}
             <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-8">
               {photos.length === 0
                 ? Array.from({ length: skeletonCount }).map((_, i) => (
@@ -64,7 +88,7 @@ const GalleryPage = () => {
                       className="h-96 w-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl"
                     />
                   ))
-                : photos.map((photo) => (
+                : displayedPhotos.map((photo) => (
                     <Link href={`/photo/${photo.id}`} key={photo.id}>
                       <div className="cursor-pointer">
                         <div className="relative h-96 w-full overflow-hidden hover:scale-105 transition-transform duration-300">
