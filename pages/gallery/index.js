@@ -67,18 +67,33 @@ const GalleryPage = () => {
               Gallery.
             </h1>
             {folders.length > 0 && (
-              <select
-                className="mt-6 p-2 border rounded"
-                value={selectedFolder}
-                onChange={(e) => setSelectedFolder(e.target.value)}
-              >
-                <option value="all">All Photos</option>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <button
+                  onClick={() => setSelectedFolder('all')}
+                  className={`flex items-center px-3 py-1 rounded link transition-colors ${
+                    selectedFolder === 'all'
+                      ? 'bg-slate-200 dark:bg-slate-700'
+                      : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  <img src="/images/folder.svg" alt="All Photos" className="h-5 w-5 mr-1" />
+                  <span className="text-sm">All Photos</span>
+                </button>
                 {folders.map((folder) => (
-                  <option key={folder.id} value={folder.id}>
-                    {folder.name}
-                  </option>
+                  <button
+                    key={folder.id}
+                    onClick={() => setSelectedFolder(folder.id)}
+                    className={`flex items-center px-3 py-1 rounded link transition-colors ${
+                      selectedFolder === folder.id
+                        ? 'bg-slate-200 dark:bg-slate-700'
+                        : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    <img src="/images/folder.svg" alt={folder.name} className="h-5 w-5 mr-1" />
+                    <span className="text-sm">{folder.name}</span>
+                  </button>
                 ))}
-              </select>
+              </div>
             )}
             <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-8">
               {photos.length === 0
