@@ -38,12 +38,13 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
       >
         {img && (
           <div
-            className="flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 h-44 mob:h-auto w-full p-10"
-            style={{ height: "500px" }}
+            className={`flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 w-full aspect-[4/3] ${
+              mounted && theme === "dark" ? "bg-gray-600" : ""
+            }`}
           >
             <img
               alt={name}
-              className="h-full w-auto object-cover transition-all ease-out duration-300"
+              className="max-w-full max-h-full object-contain transition-all ease-out duration-300"
               src={img}
             />
           </div>

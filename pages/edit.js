@@ -587,11 +587,29 @@ const Edit = () => {
         {currentTabs === "ABOUT" && (
           <div className="mt-10">
             <h1 className="text-2xl">About</h1>
-            <textarea
-              className="w-full h-96 mt-10 p-2 rounded-md shadow-md border"
-              value={data.aboutpara}
-              onChange={(e) => setData({ ...data, aboutpara: e.target.value })}
-            ></textarea>
+            <div className="flex items-center mt-5">
+              <label className="w-1/5 text-lg opacity-50">About Text</label>
+              <textarea
+                className="w-4/5 ml-10 h-48 p-2 rounded-md shadow-lg border-2"
+                value={data.aboutpara || ""}
+                onChange={(e) =>
+                  setData({ ...data, aboutpara: e.target.value })
+                }
+                placeholder="Write your about text here (optional)"
+              ></textarea>
+            </div>
+            <div className="flex items-center mt-5">
+              <label className="w-1/5 text-lg opacity-50">Quote</label>
+              <input
+                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                value={data.aboutquote || ""}
+                onChange={(e) =>
+                  setData({ ...data, aboutquote: e.target.value })
+                }
+                type="text"
+                placeholder="Add an optional quote"
+              />
+            </div>
           </div>
         )}
         {currentTabs === "SOCIAL" && (

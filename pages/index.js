@@ -94,16 +94,30 @@ export default function Home() {
           <Socials className="mt-2 laptop:mt-5" />
         </div>
         <div className="mt-10 laptop:mt-32 p-2 laptop:p-0" ref={aboutRef}>
-          <h1 className=" text-3xl text-bold">About.</h1>
+          <h1 className=" text-3xl text-bold">Quote.</h1>
           <div className="tablet:m-10 mt-2 text-lg laptop:text-2xl w-full laptop:w-3/5">
-            {data.aboutpara.split("\n").map((line, idx) => (
-              <p key={idx} className="text-2lg mb-4">
-                {line}
-              </p>
-            ))}
+            {data.aboutpara &&
+              data.aboutpara.split("\n").map((line, idx) => (
+                <p key={idx} className="text-2lg mb-4">
+                  {line}
+                </p>
+              ))}
+            {data.aboutquote && (
+              <blockquote className="mt-8 relative pl-6 py-4">
+                <span className="absolute left-0 top-0 text-6xl opacity-20 leading-none font-serif">
+                  "
+                </span>
+                <p className="text-xl italic opacity-90 px-4 inline">
+                  {data.aboutquote}
+                  <span className="text-6xl opacity-20 leading-none font-serif relative -top-4 ml-1">
+                    "
+                  </span>
+                </p>
+              </blockquote>
+            )}
           </div>
         </div>
-        <div className="mt-10 laptop:mt-32 p-2 laptop:p-0" ref={workRef}>
+        <div className="mt-10 laptop:mt-14 p-2 laptop:p-0" ref={workRef}>
           <h1 className="text-3xl text-bold">Projects.</h1>
 
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8">
