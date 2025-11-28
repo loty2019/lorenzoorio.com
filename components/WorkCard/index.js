@@ -18,7 +18,9 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
     <>
       <div
         className={`overflow-hidden rounded-xl p-4 laptop:p-6 first:ml-0 link flex flex-col items-start justify-start transition-all ease-out duration-300 ${
-          mounted && theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-50"
+          mounted && theme === "dark"
+            ? "hover:bg-slate-800"
+            : "hover:bg-slate-50"
         } hover:scale-105`}
         onClick={onClick}
         style={{
