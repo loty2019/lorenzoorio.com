@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import { useTheme } from "next-themes";
 
 const WorkCard = ({ img, name, description, github, onClick }) => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   if (!img && !name && !description && !github) {
     return null;
   }
@@ -11,7 +17,9 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
   return (
     <>
       <div
-        className="overflow-hidden rounded-xl p-4 laptop:p-6 first:ml-0 link flex flex-col items-start justify-start transition-all duration-300"
+        className={`overflow-hidden rounded-xl p-4 laptop:p-6 first:ml-0 link flex flex-col items-start justify-start transition-all ease-out duration-300 ${
+          mounted && theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-50"
+        } hover:scale-105`}
         onClick={onClick}
         style={{
           backdropFilter: "blur(10px)", // Glass effect

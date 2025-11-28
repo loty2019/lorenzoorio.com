@@ -7,6 +7,7 @@ import Socials from "../components/Socials";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
 import { useTheme } from "next-themes";
+import { sortByOrder } from "../utils";
 // Data
 import { name, showResume } from "../data/portfolio.json";
 import { resume } from "../data/portfolio.json";
@@ -58,7 +59,7 @@ const Resume = () => {
               <div className="mt-5">
                 <h1 className="text-2xl font-bold">Experience</h1>
 
-                {resume.experiences.map(
+                {sortByOrder(resume.experiences).map(
                   ({ id, dates, type, position, bullets, link }) => (
                     <ProjectResume
                       key={id}
@@ -86,7 +87,7 @@ const Resume = () => {
               <div className="mt-5">
                 <h1 className="text-2xl font-bold">Activities</h1>
 
-                {resume.activities.map(
+                {sortByOrder(resume.activities).map(
                   ({ id, dates, type, position, bullets, link }) => (
                     <ProjectResume
                       key={id}
@@ -160,7 +161,6 @@ const Resume = () => {
         )}
       </div>
       <Footer />
-      
     </>
   );
 };

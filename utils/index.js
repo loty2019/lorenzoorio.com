@@ -3,6 +3,16 @@ import { useLayoutEffect, useEffect } from "react";
 export const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+// Sort array by order field (ascending). Items without order go to the end.
+export function sortByOrder(items) {
+  if (!items) return [];
+  return [...items].sort((a, b) => {
+    const orderA = a.order ?? Infinity;
+    const orderB = b.order ?? Infinity;
+    return orderA - orderB;
+  });
+}
+
 export function ISOToDate(date) {
   if (date) {
     let convertDate = new Date(date);

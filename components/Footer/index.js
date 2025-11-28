@@ -27,7 +27,7 @@ const Footer = ({}) => {
               type="primary"
               onClick={() => window.open(emailLink)}
             >
-              Schedule a call
+              Send me an Email
             </Button>
             <div className="mt-5">
               <Socials />

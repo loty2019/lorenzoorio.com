@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import ActivityCard from "../components/ActivityCard";
 import Socials from "../components/Socials";
 import WorkCard from "../components/WorkCard";
-import { useIsomorphicLayoutEffect } from "../utils";
+import { useIsomorphicLayoutEffect, sortByOrder } from "../utils";
 import { stagger } from "../animations";
 import Footer from "../components/Footer";
 import Head from "next/head";
@@ -97,10 +97,7 @@ export default function Home() {
           <h1 className=" text-3xl text-bold">About.</h1>
           <div className="tablet:m-10 mt-2 text-lg laptop:text-2xl w-full laptop:w-3/5">
             {data.aboutpara.split("\n").map((line, idx) => (
-              <p
-                key={idx}
-                className="text-2lg mb-4"
-              >
+              <p key={idx} className="text-2lg mb-4">
                 {line}
               </p>
             ))}
@@ -109,8 +106,8 @@ export default function Home() {
         <div className="mt-10 laptop:mt-32 p-2 laptop:p-0" ref={workRef}>
           <h1 className="text-3xl text-bold">Projects.</h1>
 
-          <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-16">
-            {data.projects.map((project) => (
+          <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8">
+            {sortByOrder(data.projects).map((project) => (
               <WorkCard
                 key={project.id}
                 img={project.imageSrc}
@@ -126,7 +123,7 @@ export default function Home() {
         <div className="mt-10 laptop:mt-32 p-2 laptop:p-0">
           <h1 className="text-3xl text-bold">Activities.</h1>
           <div className="mt-5 tablet:m-10 grid grid-cols-1 laptop:grid-cols-2 gap-6">
-            {data.activities.map((activity, index) => (
+            {sortByOrder(data.activities).map((activity, index) => (
               <ActivityCard
                 key={index}
                 name={activity.title}
