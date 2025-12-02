@@ -5,10 +5,17 @@ import { useTheme } from "next-themes";
 const WorkCard = ({ img, name, description, github, onClick }) => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState();
+  const [expanded, setExpanded] = useState(false);
+  const charLimit = 1800;
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const shouldTruncate = description && description.length > charLimit;
+  const displayDescription = shouldTruncate && !expanded 
+    ? description.slice(0, charLimit) + "..." 
+    : description;
 
   if (!img && !name && !description && !github) {
     return null;
@@ -54,8 +61,19 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
             {name ? name : "Project Name"}
           </h1>
           <h2 className="text-xl opacity-70 mt-2">
-            {description ? description : "Description"}
+            {description ? displayDescription : "Description"}
           </h2>
+          {shouldTruncate && (
+            <button
+              className="text-sm mt-1 opacity-60 hover:opacity-100 underline transition-opacity"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(!expanded);
+              }}
+            >
+              {expanded ? "Show less" : "Read more"}
+            </button>
+          )}
         </div>
         {github && (
           <div
