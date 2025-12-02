@@ -47,7 +47,7 @@ const WorkCard = ({ img, name, description, github, onClick }) => {
         {img && (
           <div
             className={`flex justify-center items-center rounded-lg overflow-hidden transition-all ease-out duration-300 w-full aspect-[4/3] ${
-              mounted && theme === "dark" ? "bg-gray-600" : ""
+              mounted && theme === "dark" ? "bg-slate-600/15" : ""
             }`}
           >
             <img

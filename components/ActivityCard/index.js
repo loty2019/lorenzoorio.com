@@ -5,7 +5,7 @@ const ActivityCard = ({ name, description, image, date, link }) => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState();
   const [expanded, setExpanded] = useState(false);
-  const charLimit = 198;
+  const charLimit = 225;
 
   useEffect(() => {
     setMounted(true);

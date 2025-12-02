@@ -64,20 +64,24 @@ const GalleryPage = () => {
               Gallery.
             </h1>
             {folders.length > 0 && (
-              <div className="mt-6 flex flex-wrap gap-4">
+              <div className="mt-6 flex flex-wrap gap-4 p-4 rounded-xl bg-slate-100 dark:bg-slate-100/10">
                 <button
                   onClick={() => setSelectedFolder("all")}
                   className={`flex items-center px-3 py-1 rounded link transition-all duration-300 hover:scale-110 ${
                     selectedFolder === "all"
-                      ? "bg-slate-200 dark:bg-slate-700"
-                      : "hover:bg-slate-200 dark:hover:bg-slate-700"
+                      ? "bg-slate-200 dark:bg-slate-700 text-black dark:text-white"
+                      : "hover:bg-slate-200 dark:hover:bg-slate-700 text-black dark:text-white hover:text-black dark:hover:text-white"
                   }`}
                 >
-                  <img
-                    src="/images/folder.svg"
-                    alt="All Photos"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
                     className="h-5 w-5 mr-1"
-                  />
+                  >
+                    <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
+                  </svg>
                   <span className="text-sm">All Photos</span>
                 </button>
                 {folders.map((folder) => (
@@ -86,15 +90,19 @@ const GalleryPage = () => {
                     onClick={() => setSelectedFolder(folder.id)}
                     className={`flex items-center px-3 py-1 rounded link transition-all duration-300 hover:scale-110 ${
                       selectedFolder === folder.id
-                        ? "bg-slate-100 dark:bg-slate-700"
-                        : "hover:bg-slate-100 dark:hover:bg-slate-700"
+                        ? "bg-slate-200 dark:bg-slate-700 text-black dark:text-white"
+                        : "hover:bg-slate-200 dark:hover:bg-slate-700 text-black dark:text-white hover:text-black dark:hover:text-white"
                     }`}
                   >
-                    <img
-                      src="/images/folder.svg"
-                      alt={folder.name}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
                       className="h-5 w-5 mr-1"
-                    />
+                    >
+                      <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
+                    </svg>
                     <span className="text-sm">{folder.name}</span>
                   </button>
                 ))}
@@ -110,8 +118,8 @@ const GalleryPage = () => {
                   ))
                 : displayedPhotos.map((photo) => (
                     <Link href={`/photo/${photo.id}`} key={photo.id}>
-                      <div className="cursor-pointer">
-                        <div className="relative h-96 w-full overflow-hidden hover:scale-105 transition-transform duration-300">
+                      <div className="cursor-pointer overflow-hidden rounded-3xl hover:scale-105 transition-transform duration-300">
+                        <div className="relative h-96 w-full rounded-3xl">
                           <Image
                             src={`/api/photo/${photo.id}`}
                             alt={photo.name}
