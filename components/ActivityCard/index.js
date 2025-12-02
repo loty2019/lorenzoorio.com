@@ -12,9 +12,10 @@ const ActivityCard = ({ name, description, image, date, link }) => {
   }, []);
 
   const shouldTruncate = description && description.length > charLimit;
-  const displayDescription = shouldTruncate && !expanded 
-    ? description.slice(0, charLimit) + "..." 
-    : description;
+  const displayDescription =
+    shouldTruncate && !expanded
+      ? description.slice(0, charLimit) + "..."
+      : description;
 
   return (
     <div
@@ -51,4 +52,4 @@ const ActivityCard = ({ name, description, image, date, link }) => {
   );
 };
 
-export default ActivityCard; 
+export default ActivityCard;
