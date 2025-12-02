@@ -43,6 +43,24 @@ body {
   );
 }
 
+.gradient-circle-title {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 180px;
+  opacity: 0.38;
+  filter: blur(25px);
+  background: radial-gradient(
+    circle,
+    rgba(248, 107, 223, 1) 0%,
+    rgba(107, 107, 248, 0.8) 100%
+  );
+}
+
 .gradient-shadow:hover::before {
   content: "";
   z-index: -1;

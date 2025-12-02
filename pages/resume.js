@@ -25,7 +25,7 @@ const Resume = () => {
     }
   }, []);
   return (
-    <>
+    <div className={`relative ${data.showCursor && "cursor-none"}`}>
       {process.env.NODE_ENV === "development" && (
         <div className="fixed bottom-6 right-6">
           <Button onClick={() => router.push("/edit")} type={"primary"}>
@@ -34,12 +34,9 @@ const Resume = () => {
         </div>
       )}
       {data.showCursor && <Cursor />}
-      <div className="gradient-circle mt-10"></div>
-      <div
-        className={`container mx-auto mb-10 ${
-          data.showCursor && "cursor-none"
-        }`}
-      >
+      <div className="gradient-circle"></div>
+      <div className="gradient-circle-bottom"></div>
+      <div className="container mx-auto mb-10">
         <Header isBlog />
         {mount && (
           <div className="mt-14 w-full flex flex-col items-center">
@@ -159,9 +156,9 @@ const Resume = () => {
             </div>
           </div>
         )}
+        <Footer />
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

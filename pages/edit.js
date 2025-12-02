@@ -36,6 +36,10 @@ const Edit = () => {
   };
 
   const addProject = () => {
+    const maxOrder = data.projects.reduce(
+      (max, p) => Math.max(max, p.order || 0),
+      0
+    );
     setData({
       ...data,
       projects: [
@@ -46,8 +50,8 @@ const Edit = () => {
           description: "Web Design & Development",
           imageSrc:
             "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60",
-
           url: "http://chetanverma.com/",
+          order: maxOrder + 1,
         },
       ],
     });
@@ -68,6 +72,10 @@ const Edit = () => {
   };
 
   const addActivity = () => {
+    const maxOrder = data.activities.reduce(
+      (max, a) => Math.max(max, a.order || 0),
+      0
+    );
     setData({
       ...data,
       activities: [
@@ -80,6 +88,7 @@ const Edit = () => {
           image: "https://via.placeholder.com/400",
           date: "2024-01-01",
           link: "https://example.com",
+          order: maxOrder + 1,
         },
       ],
     });
@@ -122,6 +131,10 @@ const Edit = () => {
   // Resume
 
   const handleAddExperiences = () => {
+    const maxOrder = data.resume.experiences.reduce(
+      (max, e) => Math.max(max, e.order || 0),
+      0
+    );
     setData({
       ...data,
       resume: {
@@ -134,6 +147,7 @@ const Edit = () => {
             type: "Full Time",
             position: "Frontend Engineer at X",
             bullets: ["Worked on the frontend of a React application"],
+            order: maxOrder + 1,
           },
         ],
       },
@@ -151,6 +165,10 @@ const Edit = () => {
 
   // Activity Handlers
   const handleAddActivity = () => {
+    const maxOrder = data.resume.activities.reduce(
+      (max, a) => Math.max(max, a.order || 0),
+      0
+    );
     setData({
       ...data,
       resume: {
@@ -164,6 +182,7 @@ const Edit = () => {
             position: "Activity Position",
             bullets: [], // Initialize as an empty array
             link: "Activity link",
+            order: maxOrder + 1,
           },
         ],
       },
@@ -475,6 +494,21 @@ const Edit = () => {
                       type="text"
                     ></input>
                   </div>
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Order</label>
+                    <input
+                      value={project.order || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          order: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="number"
+                      placeholder="Display order (lower = first)"
+                    ></input>
+                  </div>
                   <hr className="my-10"></hr>
                 </div>
               ))}
@@ -571,6 +605,21 @@ const Edit = () => {
                       }
                       className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
                       type="text"
+                    ></input>
+                  </div>
+                  <div className="flex items-center mt-5">
+                    <label className="w-1/5 text-lg opacity-50">Order</label>
+                    <input
+                      value={activity.order || ""}
+                      onChange={(e) =>
+                        editActivities(index, {
+                          ...activity,
+                          order: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      type="number"
+                      placeholder="Display order (lower = first)"
                     ></input>
                   </div>
                   <hr className="my-10"></hr>
@@ -802,6 +851,23 @@ const Edit = () => {
                       ></input>
                     </div>
                   </div>
+                  <div className="mt-2 flex">
+                    <label className="w-1/5 text-lg opacity-50">Order</label>
+                    <div className="w-4/5 ml-10 flex flex-col">
+                      <input
+                        value={experiences.order || ""}
+                        onChange={(e) =>
+                          handleEditExperiences(index, {
+                            ...experiences,
+                            order: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        placeholder="Display order (lower = first)"
+                        className="p-2 rounded-md shadow-lg border-2"
+                        type="number"
+                      ></input>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -970,6 +1036,21 @@ const Edit = () => {
                         }
                         className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
                         type="text"
+                      />
+                    </div>
+                    <div className="mt-2 flex">
+                      <label className="w-1/5 text-lg opacity-50">Order</label>
+                      <input
+                        value={activity.order || ""}
+                        onChange={(e) =>
+                          handleEditActivity(index, {
+                            ...activity,
+                            order: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                        type="number"
+                        placeholder="Display order (lower = first)"
                       />
                     </div>
                   </div>

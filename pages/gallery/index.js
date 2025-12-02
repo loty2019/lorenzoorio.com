@@ -43,17 +43,14 @@ const GalleryPage = () => {
 
   return (
     showBlog.current && (
-      <>
+      <div className={`relative ${data.showCursor && "cursor-none"}`}>
         {data.showCursor && <Cursor />}
         <Head>
           <title>Gallery</title>
         </Head>
-        <div className="gradient-circle mt-10"></div>
-        <div
-          className={`container mx-auto mb-10 ${
-            data.showCursor && "cursor-none"
-          }`}
-        >
+        <div className="gradient-circle"></div>
+        <div className="gradient-circle-bottom"></div>
+        <div className="container mx-auto mb-10">
           <Header isBlog={true}></Header>
           <div className="mt-10">
             <ContentSection
@@ -69,27 +66,35 @@ const GalleryPage = () => {
             {folders.length > 0 && (
               <div className="mt-6 flex flex-wrap gap-4">
                 <button
-                  onClick={() => setSelectedFolder('all')}
-                  className={`flex items-center px-3 py-1 rounded link transition-colors ${
-                    selectedFolder === 'all'
-                      ? 'bg-slate-200 dark:bg-slate-700'
-                      : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                  onClick={() => setSelectedFolder("all")}
+                  className={`flex items-center px-3 py-1 rounded link transition-all duration-300 hover:scale-110 ${
+                    selectedFolder === "all"
+                      ? "bg-slate-200 dark:bg-slate-700"
+                      : "hover:bg-slate-200 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <img src="/images/folder.svg" alt="All Photos" className="h-5 w-5 mr-1" />
+                  <img
+                    src="/images/folder.svg"
+                    alt="All Photos"
+                    className="h-5 w-5 mr-1"
+                  />
                   <span className="text-sm">All Photos</span>
                 </button>
                 {folders.map((folder) => (
                   <button
                     key={folder.id}
                     onClick={() => setSelectedFolder(folder.id)}
-                    className={`flex items-center px-3 py-1 rounded link transition-colors ${
+                    className={`flex items-center px-3 py-1 rounded link transition-all duration-300 hover:scale-110 ${
                       selectedFolder === folder.id
-                        ? 'bg-slate-200 dark:bg-slate-700'
-                        : 'hover:bg-slate-200 dark:hover:bg-slate-700'
+                        ? "bg-slate-200 dark:bg-slate-700"
+                        : "hover:bg-slate-200 dark:hover:bg-slate-700"
                     }`}
                   >
-                    <img src="/images/folder.svg" alt={folder.name} className="h-5 w-5 mr-1" />
+                    <img
+                      src="/images/folder.svg"
+                      alt={folder.name}
+                      className="h-5 w-5 mr-1"
+                    />
                     <span className="text-sm">{folder.name}</span>
                   </button>
                 ))}
@@ -112,7 +117,6 @@ const GalleryPage = () => {
                             alt={photo.name}
                             layout="fill"
                             objectFit="contain"
-                      
                           />
                         </div>
                       </div>
@@ -120,9 +124,9 @@ const GalleryPage = () => {
                   ))}
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </>
+      </div>
     )
   );
 };
