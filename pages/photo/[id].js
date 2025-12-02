@@ -72,7 +72,11 @@ const PhotoPage = () => {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
           {/* Previous button */}
@@ -95,7 +99,11 @@ const PhotoPage = () => {
               !canGoNext ? "opacity-30 cursor-not-allowed hover:scale-100" : ""
             }`}
           >
-            <img src="/images/back.svg" alt="Next" className="w-10 h-10 rotate-180 dark:invert" />
+            <img
+              src="/images/back.svg"
+              alt="Next"
+              className="w-10 h-10 rotate-180 dark:invert"
+            />
           </button>
         </div>
       )}
