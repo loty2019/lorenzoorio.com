@@ -10,11 +10,23 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const { name, showBlog, showResume } = data;
 
   useEffect(() => {
     setMounted(true);
+    
+    const handleScroll = () => {
+      // Calculate scroll progress from 0 to 1 over 150px of scrolling
+      const progress = Math.min(window.scrollY / 150, 1);
+      setScrollProgress(progress);
+      setScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -127,9 +139,15 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
         )}
       </Popover>
       <div
-        className={`mt-10 hidden flex-row items-center justify-between sticky ${
-          theme === "light" && "bg-white"
-        } dark:text-white top-0 z-10 tablet:flex`}
+        className="mt-10 hidden flex-row items-center justify-between sticky py-2 px-6 dark:text-white top-2 z-10 tablet:flex rounded-3xl"
+        style={{
+          backgroundColor: mounted && theme === "dark" 
+            ? `rgba(0, 0, 0, ${scrollProgress * 0.2})` 
+            : `rgba(255, 255, 255, ${scrollProgress * 0.2})`,
+          backdropFilter: `blur(${scrollProgress * 5}px)`,
+          WebkitBackdropFilter: `blur(${scrollProgress * 5}px)`,
+          transition: 'all 0.5s ease',
+        }}
       >
         <h1
           onClick={() => router.push("/")}

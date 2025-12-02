@@ -86,8 +86,8 @@ const GalleryPage = () => {
                     onClick={() => setSelectedFolder(folder.id)}
                     className={`flex items-center px-3 py-1 rounded link transition-all duration-300 hover:scale-110 ${
                       selectedFolder === folder.id
-                        ? "bg-slate-200 dark:bg-slate-700"
-                        : "hover:bg-slate-200 dark:hover:bg-slate-700"
+                        ? "bg-slate-100 dark:bg-slate-700"
+                        : "hover:bg-slate-100 dark:hover:bg-slate-700"
                     }`}
                   >
                     <img
