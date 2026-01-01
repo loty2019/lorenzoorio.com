@@ -120,7 +120,7 @@ export default function Home() {
             )}
           </div>
         </div>
-        <div className="mt-10 laptop:mt-32 p-2 laptop:p-0" ref={workRef}>
+        <div className="mt-10 laptop:mt-24 p-2 laptop:p-0" ref={workRef}>
           <h1 className="relative inline-block text-3xl text-bold">
             <div className="gradient-circle-title"></div>
             Projects.
